@@ -15,12 +15,3 @@ app.listen(port, () => console.log(`server started on port ${port}`))
 const fs = require('fs');
 const path = require('path');
 
-// Ensure the uploads folder exists
-const uploadsDir = path.join(__dirname, 'uploads');
-
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir);
-  console.log('Uploads directory created!');
-} else {
-  console.log('Uploads directory already exists.');
-}

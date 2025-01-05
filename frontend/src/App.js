@@ -5,6 +5,7 @@ import Header from './components/Header'
 import Dashboard from './pages/Dashboard'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import AllPosts from './components/Allposts';  // Imported but not used
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path='/' element={<Dashboard />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/all-posts' element={<AllPosts />} /> {/* Added AllPosts route */}
           </Routes>
         </div>
       </Router>

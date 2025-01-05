@@ -14,12 +14,15 @@ const multer = require('multer')
 const storage = multer.memoryStorage()
 const upload = multer({storage})
 
-const { getPosts,setPost,updatePost,deletePost} = require ('../controllers/postController')
+const {  updateLikes,getAllPosts,addComment, getPosts,setPost,updatePost,deletePost} = require ('../controllers/postController')
 const {protect} = require('../middleware/authMiddleware')
 router.post('/', upload.single('image'), protect, setPost)
+router.put('/:id/likes', updateLikes);
 
 router.route('/').get(protect,getPosts)
 router.route('/:id').put(protect,updatePost).delete(protect,deletePost)
+router.get('/all', getAllPosts);
+router.route('/:id/comments').post(protect,addComment);
 
 
 

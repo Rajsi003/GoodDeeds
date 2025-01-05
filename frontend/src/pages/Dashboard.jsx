@@ -6,6 +6,7 @@ import PostItem from '../components/PostItem'
 import Spinner from '../components/Spinner'
 import { getPosts, reset } from '../features/posts/postSlice'
 import { FaCoins } from 'react-icons/fa'; 
+import Navbar from '../components/Navbar';
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -25,12 +26,15 @@ function Dashboard() {
       navigate('/login')
     }
 
-    dispatch(getPosts())
+    // Make sure to dispatch getPosts with the user token
+    if (user) {
+      dispatch(getPosts(user.token))
+    }
 
     return () => {
       dispatch(reset())
     }
-  }, [user, navigate, isError, message,dispatch])
+  }, [user, navigate, isError, message, dispatch])
 
   if (isLoading) {
     return <Spinner />
@@ -38,22 +42,24 @@ function Dashboard() {
 
   return (
     <>
-    <div className="login-container">
-      <section className="login-heading">
-        <h1>Welcome {user && user.name}</h1>
-        <FaCoins style={{ color: 'gold', marginLeft: '10px' }} />
+      <Navbar  />
+      <div className="login-container">
+        <section className="login-heading">
+          <h1>Welcome {user && user.name}</h1>
+          <FaCoins style={{ color: 'gold', marginLeft: '10px' }} />
           {posts && posts.length > 0 && (
             <span style={{ marginLeft: '5px' }}>
               {posts.length} Points
             </span>
           )}
-        <section className="login-heading">
-        <p>Done a good deed lately? Let us know...</p>
         </section>
-      </section>
 
-      <PostForm />
-    </div>
+        <section className="login-heading">
+          <p>Done a good deed lately? Let us know...</p>
+        </section>
+
+        <PostForm />
+      </div>
 
       <section className='content'>
         {posts.length > 0 ? (
