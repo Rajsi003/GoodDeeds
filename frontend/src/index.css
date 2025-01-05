@@ -1,13 +1,170 @@
+/* General Styling */
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+  background-color: #f2bb4b; /* Yellow background */
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Container for Login/Register Page */
+.login-container,
+.register-container {
+  background-color: #faf3f0;
+  width: 400px;
+  padding: 0.5 rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
+  margin: 0 auto; /* Centers the box horizontally */
 }
+.post {
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.post-content {
+  display: flex;
+  flex-direction: row; /* Align image and text side by side */
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.post-image {
+  width: 300px;
+  margin-right: 15px;
+}
+
+.post-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.post-text {
+  flex-grow: 1;
+  text-align: left;
+}
+
+.post-text h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin-top: 10px;
+}
+
+.post-timestamp {
+  font-size: 12px;
+  color: #777;
+}
+
+.post-delete-button {
+  padding: 5px 10px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.post-delete-button:hover {
+  background-color: #cc0000;
+}
+
+
+
+/* Heading Section */
+.login-heading h1,
+.register-heading h1 {
+  color: #472a2c; /* Brown text */
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.login-heading p,
+.register-heading p {
+  color: #472a2c; /* Brown text */
+  margin-bottom: 2rem;
+}
+
+/* Form Controls */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-control {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Submit Button */
+.btn-submit {
+  background-color: #472a2c; /* Brown background */
+  color: #f2bb4b; /* Yellow text */
+
+  border: 10px solid  #faf3f0;
+  padding: 10px ;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: #f2bb4b; /* Yellow background */
+  color: #472a2c; /* Brown text */
+  border: 10px solid #472a2c;
+}
+
+/* Responsive Styling */
+@media (max-width: 500px) {
+  .login-container,
+  .register-container {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}
+/* 
+.loadingSpinnerContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingSpinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: #000 transparent #555 transparent;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+} */

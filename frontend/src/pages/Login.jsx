@@ -1,105 +1,101 @@
-import { useState } from 'react';
-import { FaSignInAlt} from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { FaSignInAlt } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { login, reset } from '../features/auth/authSlice';
+import Spinner from '../components/Spinner';
 
 function Login() {
   const [formData, setFormData] = useState({
-
     email: '',
-
     password: '',
-
   });
 
   const { email, password } = formData;
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || user) {
+      navigate('/');
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
   const onChange = (e) => {
-    setFormData((prevState)=>({
-        ...prevState,
-        [e.target.name]: e.target.value,
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
     }));
   };
-  const onSubmit = (e) =>{
-      e.preventDefault()
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const userData = {
+      email,
+      password,
+    };
+
+    dispatch(login(userData));
+  };
+
+  if (isLoading) {
+    return <Spinner />;
   }
-  const containerStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    backgroundColor: '#f9f9f9',
-  };
-
-  const formStyle = {
-    backgroundColor: '#f2bb4b', // Yellow square
-    padding: '2rem',
-    borderRadius: '10px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-    textAlign: 'center',
-    width: '300px',
-  };
-
-  const textStyle = {
-    color: 'brown',
-    marginBottom: '1rem',
-  };
-
-  const inputStyle = {
-    width: '100%',
-    padding: '0.5rem',
-    margin: '0.5rem 0',
-    border: '1px solid #ccc',
-    borderRadius: '5px',
-    backgroundColor: '#fff', // White input box
-    color: '#000',
-  };
-
-  const buttonStyle = {
-    backgroundColor: 'brown',
-    color: '#fff',
-    padding: '0.5rem',
-    border: '1px solid',
-    borderRadius: '5px',
-    margin: '0.5rem 0',
-    cursor: 'pointer',
-    width: '100%',
-  };
 
   return (
-    <div style={containerStyle}>
-      <div style={formStyle}>
-        <h1 style={textStyle}>
+    <div className="login-container">
+      <section className="login-heading">
+        <h1>
           <FaSignInAlt /> Login
         </h1>
-        <p style={textStyle}>Please log into your account</p>
-        <form onSubmit = {onSubmit}>
+        <p>Log into your account</p>
+      </section>
 
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            name="email"
-            value={email}
-            placeholder="Enter email"
-            onChange={onChange}
-            style={inputStyle}
-          />
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            name="password"
-            value={password}
-            placeholder="Enter password"
-            onChange={onChange}
-            style={inputStyle}
-          />
+      <section className="login-form">
+        <form onSubmit={onSubmit}>
+          <div className="form-group">
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              name="email"
+              value={email}
+              placeholder="Enter your email"
+              onChange={onChange}
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              value={password}
+              placeholder="Enter password"
+              onChange={onChange}
+            />
+          </div>
 
-          
-          <button type="submit" style={buttonStyle}>
-            Submit
-          </button>
+          <div className="form-group">
+            <button type="submit" className="btn-submit">
+              Submit
+            </button>
+          </div>
         </form>
-      </div>
+      </section>
     </div>
   );
 }
