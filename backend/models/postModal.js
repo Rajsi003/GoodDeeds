@@ -12,18 +12,18 @@ const postSchema = mongoose.Schema(
       required: [true, 'Please enter post description'],
     },
     image: {
-      type: String, // URL or path to an image
+      type: String, 
       default: '',
     },
     likes: {
       type: Number,
-      default: 0, // Initialize with 0 likes
+      default: 0, 
     },
     comments: [
       {
         user: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'User', // Reference to the user who made the comment
+          ref: 'User', 
           required: true,
         },
         text: {
@@ -32,7 +32,7 @@ const postSchema = mongoose.Schema(
         },
         createdAt: {
           type: Date,
-          default: Date.now, // Timestamp for the comment
+          default: Date.now, 
         },
       },
     ],

@@ -7,8 +7,8 @@ const User = require('../models/userModal');
 // @access  Private
 const getAllPosts = asyncHandler(async (req, res) => {
   const posts = await Post.find({})
-    .populate('user', 'name email') // Populate user details
-    .populate('comments.user', 'name'); // Populate comment user details
+    .populate('user', 'name email') 
+    .populate('comments.user', 'name'); /
 
   if (!posts) {
     res.status(404);
@@ -97,7 +97,7 @@ const addComment = asyncHandler(async (req, res) => {
 
   // Create a new comment
   const newComment = {
-    user: req.user.id, // The user adding the comment
+    user: req.user.id, 
     text: text,
   };
 
@@ -110,7 +110,7 @@ const addComment = asyncHandler(async (req, res) => {
   // Return the updated post with comments
   res.status(201).json({
     message: 'Comment added successfully',
-    comments: post.comments, // Return the updated comments array
+    comments: post.comments, 
   });
 });
 
@@ -177,7 +177,7 @@ const deletePost = asyncHandler(async (req, res) => {
 // @route   PUT /api/posts/:id/likes
 // @access  Private
 const updateLikes = asyncHandler(async (req, res) => {
-  const { increment } = req.body; // Pass `increment: true` or `increment: false` from frontend
+  const { increment } = req.body;
 
   // Find the post by ID
   const post = await Post.findById(req.params.id);
@@ -197,8 +197,8 @@ const updateLikes = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     message: 'Likes updated successfully',
-    _id: post._id, // Include post ID
-    likes: post.likes, // Include updated likes count
+    _id: post._id, 
+    likes: post.likes, 
   });
 });
 

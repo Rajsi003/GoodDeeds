@@ -11,8 +11,8 @@ const userSchema = mongoose.Schema({
         unique : true
     },
     profilePic: {
-        type: String, // Stores the URL or path to the image
-        default: 'default-profile-pic.jpg' // Optional: Provide a default profile picture
+        type: String,
+        default: 'default-profile-pic.jpg' 
     },
     password : {
         type : String,
